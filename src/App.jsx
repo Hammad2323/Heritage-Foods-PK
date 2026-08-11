@@ -197,7 +197,10 @@ function ProductCard({ product, onAdd, searchQuery }) {
       </button>
 
       {/* Image */}
-      <div className="relative overflow-hidden shrink-0" style={{ height: 160, background: 'var(--muted)' }}>
+      <div
+  className="relative overflow-hidden shrink-0 h-[105px] sm:h-[135px] lg:h-[160px]"
+  style={{ background: 'var(--muted)' }}
+>
         <img
           src={product.img}
           alt={product.name}
@@ -210,54 +213,82 @@ function ProductCard({ product, onAdd, searchQuery }) {
       </div>
 
       {/* Body */}
-      <div className="flex flex-col flex-1 p-3 gap-1.5">
+    <div className="flex flex-col flex-1 p-2 sm:p-3 gap-1.5">
         {/* Category chip */}
-        <span className="text-[10px] font-black tracking-wide uppercase px-2 py-0.5 rounded-full w-fit"
+        <span className="text-[8px] sm:text-[10px] font-black tracking-wide uppercase px-1.5 sm:px-2 py-0.5 rounded-full w-fit max-w-full truncate"
           style={{ background: cat.bg, color: cat.color }}>
           {cat.icon} {cat.short}
         </span>
 
         {/* Name */}
-        <h3 className="font-semibold text-sm leading-snug line-clamp-2" style={{ color: 'var(--card-foreground)' }}>
+        <h3
+  className="font-semibold text-[11px] sm:text-sm leading-tight line-clamp-2 min-h-[28px] sm:min-h-[40px]" style={{ color: 'var(--card-foreground)' }}>
           {product.name}
         </h3>
 
         {/* Price */}
         <div className="flex items-baseline gap-1">
-          <span className="font-display font-black text-base" style={{ color: 'var(--primary)' }}>
+       <span className="font-display font-black text-[12px] sm:text-base" style={{ color: 'var(--primary)' }}>
             {pkr(product.price)}
           </span>
-          <span className="text-[11px]" style={{ color: 'var(--muted-foreground)' }}>/kg</span>
+         <span className="text-[9px] sm:text-[11px]" style={{ color: 'var(--muted-foreground)' }}>/kg</span>
         </div>
 
         {/* Stars */}
-        <div className="flex items-center gap-1.5">
+       <div className="flex items-center gap-1 min-w-0">
           <Stars n={product.rating} />
-          <span className="text-[11px]" style={{ color: 'var(--muted-foreground)' }}>({product.reviews})</span>
+        <span className="text-[9px] sm:text-[11px] truncate" style={{ color: 'var(--muted-foreground)' }}>({product.reviews})</span>
         </div>
 
-        {/* Qty + Add */}
-        <div className="flex items-center gap-2 mt-auto pt-1.5">
-          <div className="flex items-center rounded-lg overflow-hidden border shrink-0"
-            style={{ borderColor: 'var(--border)' }}>
-            <button
-              onClick={() => setQty(q => Math.max(1, q - 1))}
-              className="w-7 h-7 flex items-center justify-center font-black text-base hover:bg-[var(--muted)] transition-colors"
-              style={{ color: 'var(--foreground)' }}>−</button>
-            <span className="w-6 text-center text-sm font-bold" style={{ color: 'var(--foreground)' }}>{qty}</span>
-            <button
-              onClick={() => setQty(q => q + 1)}
-              className="w-7 h-7 flex items-center justify-center font-black text-base hover:bg-[var(--muted)] transition-colors"
-              style={{ color: 'var(--foreground)' }}>+</button>
-          </div>
-          <button
-            onClick={handleAdd}
-            className="flex-1 py-1.5 rounded-lg text-xs font-black transition-all duration-200"
-            style={{ background: added ? '#16a34a' : 'var(--primary)', color: '#fff' }}
-          >
-            {added ? '✓ Added!' : 'Add to Cart'}
-          </button>
-        </div>
+       {/* Qty + Add */}
+<div className="mt-auto pt-2 flex flex-col gap-2">
+
+  {/* Quantity */}
+  <div className="flex justify-center">
+    <div
+      className="flex items-center rounded-lg overflow-hidden border"
+      style={{ borderColor: 'var(--border)' }}
+    >
+      <button
+        onClick={() => setQty(q => Math.max(1, q - 1))}
+        className="w-8 h-8 sm:w-7 sm:h-7 flex items-center justify-center font-black text-base hover:bg-[var(--muted)] active:bg-[var(--muted)] transition-colors"
+        style={{ color: 'var(--foreground)' }}
+        aria-label="Decrease quantity"
+      >
+        −
+      </button>
+
+      <span
+        className="w-7 sm:w-6 text-center text-sm font-bold"
+        style={{ color: 'var(--foreground)' }}
+      >
+        {qty}
+      </span>
+
+      <button
+        onClick={() => setQty(q => q + 1)}
+        className="w-8 h-8 sm:w-7 sm:h-7 flex items-center justify-center font-black text-base hover:bg-[var(--muted)] active:bg-[var(--muted)] transition-colors"
+        style={{ color: 'var(--foreground)' }}
+        aria-label="Increase quantity"
+      >
+        +
+      </button>
+    </div>
+  </div>
+
+  {/* Add to cart */}
+  <button
+    onClick={handleAdd}
+    className="w-full py-2 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-black transition-all duration-200 active:scale-[0.97]"
+    style={{
+      background: added ? '#16a34a' : 'var(--primary)',
+      color: '#fff'
+    }}
+  >
+    {added ? '✓ Added!' : 'Add to Cart'}
+  </button>
+
+</div>
       </div>
     </div>
   )
@@ -1000,7 +1031,7 @@ function Navbar({ dark, onToggleDark, cartCount, onCartOpen, searchQuery, onSear
             </div>
             {NAV_LINKS.map(link => (
               <a key={link.label} href={link.href} onClick={() => setMobileOpen(false)}
-                className="px-5 py-3.5 text-sm font-bold border-b flex items-center justify-between"
+               className="px-3 sm:px-5 py-3 sm:py-4 text-sm font-bold border-b flex items-center justify-between min-h-[52px] active:bg-[var(--muted)]"
                 style={{ color: 'var(--foreground)', borderColor: 'var(--border)' }}>
                 {link.label}
                 {link.hot && <span className="text-[10px] font-black px-1.5 py-0.5 rounded-full" style={{ background: '#E07830', color: '#fff' }}>HOT</span>}
@@ -1042,7 +1073,14 @@ function Navbar({ dark, onToggleDark, cartCount, onCartOpen, searchQuery, onSear
    ══════════════════════════════════════════════ */
 function CategoryIconRow() {
   return (
-    <div style={{ background: 'var(--background)', padding: '24px 16px 20px', borderBottom: '1px solid var(--border)' }}>
+   <div
+  className="hidden lg:block"
+  style={{
+    background: 'var(--background)',
+    padding: '24px 16px 20px',
+    borderBottom: '1px solid var(--border)'
+  }}
+>
       <p className="text-center text-xs font-black tracking-widest uppercase mb-5" style={{ color: 'var(--muted-foreground)' }}>
         Browse by Category
       </p>
@@ -1159,7 +1197,10 @@ export default function App() {
       <FloatingButtons />
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden" style={{ minHeight: 520 }}>
+<section
+  className="relative overflow-hidden"
+  style={{ minHeight: 520 }}
+>
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1769255484646-16988ad5552d?w=1600&h=650&fit=crop&auto=format"
             alt="Heritage Foods PK" className="w-full h-full object-cover" />
@@ -1169,28 +1210,31 @@ export default function App() {
               : 'linear-gradient(135deg,rgba(250,246,241,0.94) 0%,rgba(250,246,241,0.2) 100%)'
           }} />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div>
             <span className="inline-block text-xs font-black tracking-widest uppercase px-3 py-1.5 rounded-full mb-5"
               style={{ background: '#14532D', color: '#D1FAE5' }}>
               🌿 Heritage Since 1982 — Pakistan
             </span>
             <h1 className="font-display font-black leading-tight mb-5"
-              style={{ fontSize: 'clamp(2rem,5vw,3.8rem)', color: 'var(--foreground)' }}>
+           style={{
+  fontSize: 'clamp(1.9rem, 8vw, 3.8rem)',
+  color: 'var(--foreground)'
+}}>
               Authentic Achar,<br />Dry Fruits &amp;<br />
               <span style={{ color: 'var(--primary)' }}>Pure Mithai</span>
             </h1>
             <p className="text-lg leading-relaxed mb-8 max-w-md" style={{ color: 'var(--muted-foreground)' }}>
               Hand-crafted Pakistani pickles, premium dry fruits, and traditional sweets — made with heritage recipes since 1982.
             </p>
-            <div className="flex flex-wrap gap-3">
+         <div className="flex flex-col sm:flex-row gap-3">
               <a href="#specials"
-                className="px-7 py-3.5 rounded-xl font-black text-base hover:opacity-90 transition-opacity"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-black text-base hover:opacity-90 transition-opacity"
                 style={{ background: 'var(--primary)', color: '#fff' }}>
                 Shop Specials 🔥
               </a>
               <a href={'https://wa.me/' + WHATSAPP_NUM} target="_blank" rel="noreferrer"
-                className="px-7 py-3.5 rounded-xl font-black text-base hover:opacity-90 transition-opacity flex items-center gap-2"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-black text-base hover:opacity-90 transition-opacity flex items-center gap-2"
                 style={{ background: '#25D366', color: '#fff' }}>
                 Order on WhatsApp
               </a>
@@ -1206,27 +1250,42 @@ export default function App() {
           </div>
 
           {/* Hero category cards */}
-          <div className="hidden lg:grid grid-cols-3 gap-3">
-            {CATS.map(cat => {
-              const img = PRODUCTS.find(p => p.cat === cat.id && p.special)?.img
-              return (
-                <a key={cat.id} href={'#cat-' + cat.id}
-                  className="relative rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
-                  style={{ height: 230 }}>
-                  <img src={img} alt={cat.label} className="w-full h-full object-cover" style={{ background: cat.bg }} />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top,rgba(0,0,0,0.78) 0%,transparent 55%)' }} />
-                  <div className="absolute bottom-0 left-0 p-4">
-                    <div style={{ fontSize: 30 }}>{cat.icon}</div>
-                    <p className="font-black text-sm text-white leading-tight mt-1">{cat.label}</p>
-                    <p className="text-xs mt-0.5" style={{ color: '#86EFAC' }}>
-                      {PRODUCTS.filter(p => p.cat === cat.id).length} items
-                    </p>
-                  </div>
-                </a>
-              )
-            })}
-          </div>
+         {/* Hero category cards */}
+<div className="hidden lg:grid grid-cols-3 gap-3">
+  {CATS.map(cat => {
+    const img = PRODUCTS.find(p => p.cat === cat.id && p.special)?.img
+    return (
+      <a key={cat.id} href={'#cat-' + cat.id}
+        className="relative rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
+        style={{ height: 230 }}>
+        <img
+          src={img}
+          alt={cat.label}
+          className="w-full h-full object-cover"
+          style={{ background: cat.bg }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to top,rgba(0,0,0,0.78) 0%,transparent 55%)'
+          }}
+        />
+        <div className="absolute bottom-0 left-0 p-4">
+          <div style={{ fontSize: 30 }}>{cat.icon}</div>
+          <p className="font-black text-sm text-white leading-tight mt-1">
+            {cat.label}
+          </p>
+          <p className="text-xs mt-0.5" style={{ color: '#86EFAC' }}>
+            {PRODUCTS.filter(p => p.cat === cat.id).length} items
+          </p>
         </div>
+      </a>
+    )
+  })}
+</div>
+
+</div>
       </section>
 
       {/* ── PERKS STRIP ── */}
@@ -1238,9 +1297,9 @@ export default function App() {
             { icon: '✅', label: 'Pure & Halal', sub: 'No preservatives' },
             { icon: '⚡', label: 'Same-Day', sub: 'Order before 2 PM' },
           ].map((f, i) => (
-            <div key={f.label} className="flex items-center gap-3 px-5 py-4 border-b lg:border-b-0"
+            <div key={f.label} className="flex items-center gap-3 px-3 sm:px-5 py-3 sm:py-4 border-b lg:border-b-0"
               style={{ borderColor: 'var(--border)', borderRight: i < 3 ? '1px solid var(--border)' : 'none' }}>
-              <span style={{ fontSize: 26 }}>{f.icon}</span>
+              <span style={{ fontSize: 22 }}>{f.icon}</span>
               <div>
                 <p className="font-bold text-sm" style={{ color: 'var(--foreground)' }}>{f.label}</p>
                 <p className="text-xs" style={{ color: 'var(--muted-foreground)' }}>{f.sub}</p>
@@ -1267,7 +1326,7 @@ export default function App() {
           {searchResults.length === 0 ? (
             <p style={{ color: 'var(--muted-foreground)' }}>No products found. Try a different keyword.</p>
           ) : (
-            <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
               {searchResults.map(p => <ProductCard key={p.id} product={p} onAdd={addToCart} searchQuery={searchQuery} />)}
             </div>
           )}
@@ -1279,7 +1338,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-4 flex items-center justify-between">
           <div>
             <p className="text-[10px] font-black tracking-widest uppercase mb-1" style={{ color: 'var(--primary)' }}>Editor Picks</p>
-            <h2 className="font-display font-black text-3xl sm:text-4xl" style={{ color: 'var(--foreground)' }}>
+            <h2 className="font-display font-black text-2xl sm:text-3xl sm:text-4xl" style={{ color: 'var(--foreground)' }}>
               Special Products
             </h2>
             <p className="mt-1 text-sm" style={{ color: 'var(--muted-foreground)' }}>
@@ -1292,7 +1351,7 @@ export default function App() {
           </span>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-10">
-          <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
             {SPECIALS.map(p => <ProductCard key={p.id} product={p} onAdd={addToCart} searchQuery={searchQuery} />)}
           </div>
         </div>
@@ -1329,8 +1388,8 @@ export default function App() {
           return (
             <div key={cat.id}>
               <div id={'cat-' + cat.id}
-                className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-5 flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full flex items-center justify-center text-3xl shrink-0 shadow-lg"
+               className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 sm:pt-10 pb-4 sm:pb-5 flex items-center gap-3 sm:gap-4">
+                <div className="w-14 h-14 rounded-full flex items-center justify-center text-2xl sm:text-3xl shrink-0 shadow-lg"
                   style={{ background: cat.bg, border: '2.5px solid ' + cat.color }}>
                   {cat.icon}
                 </div>
@@ -1344,7 +1403,7 @@ export default function App() {
                 </span>
               </div>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-10">
-                <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+             <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
                   {catProds.map(p => <ProductCard key={p.id} product={p} onAdd={addToCart} searchQuery={searchQuery} />)}
                 </div>
               </div>
@@ -1363,7 +1422,7 @@ export default function App() {
               style={{ height: 420, background: 'var(--muted)' }} />
             <div className="absolute -bottom-4 -right-4 p-5 rounded-2xl border shadow-xl"
               style={{ background: 'var(--card)', borderColor: 'var(--border)' }}>
-              <p className="font-display font-black text-3xl" style={{ color: 'var(--primary)' }}>42</p>
+              <p className="font-display font-black text-2xl sm:text-3xl" style={{ color: 'var(--primary)' }}>42</p>
               <p className="text-xs" style={{ color: 'var(--muted-foreground)' }}>Years of Heritage</p>
             </div>
           </div>
@@ -1405,7 +1464,7 @@ export default function App() {
       <section id="contact" style={{ background: 'var(--secondary)', padding: '56px 16px' }}>
         <div className="max-w-xl mx-auto text-center">
           <span style={{ fontSize: 44 }}>📬</span>
-          <h2 className="font-display font-bold text-3xl mt-4 mb-3" style={{ color: 'var(--foreground)' }}>
+          <h2 className="font-display font-bold text-2xl sm:text-3xl mt-4 mb-3" style={{ color: 'var(--foreground)' }}>
             Stay Connected
           </h2>
           <p className="mb-7" style={{ color: 'var(--muted-foreground)' }}>
@@ -1423,7 +1482,7 @@ export default function App() {
                 className="flex-1 px-5 py-3.5 rounded-xl text-sm outline-none border"
                 style={{ background: 'var(--card)', borderColor: 'var(--border)', color: 'var(--foreground)' }} />
               <button type="submit"
-                className="px-7 py-3.5 rounded-xl font-black text-sm whitespace-nowrap hover:opacity-90 transition-opacity"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-black text-sm whitespace-nowrap hover:opacity-90 transition-opacity"
                 style={{ background: 'var(--primary)', color: '#fff' }}>
                 Subscribe
               </button>

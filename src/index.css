@@ -90,3 +90,32 @@ body {
 .font-display {
   font-family: 'Playfair Display', serif;
 }
+/* =====================================================
+   MOBILE HOME PAGE OPTIMIZATION
+   Desktop remains unchanged
+   ===================================================== */
+
+@media (max-width: 639px) {
+
+  /* Hide horizontal scrollbar for mobile category strip */
+  .mobile-category-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-category-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /* Better tap behaviour */
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent accidental horizontal page overflow */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
