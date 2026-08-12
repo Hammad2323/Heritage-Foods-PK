@@ -1940,7 +1940,7 @@ export default function App() {
       <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
-            <img src="https://images.unsplash.com/photo-1778448806852-db6a837fa98f?w=700&h=500&fit=crop&auto=format"
+            <img src="/story.jpg"
               alt="Heritage Foods sweets" className="w-full rounded-2xl object-cover"
               style={{ height: 420, background: 'var(--muted)' }}
               onError={e => { e.currentTarget.style.background = '#ECFDF5' }} />
